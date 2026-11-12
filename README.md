@@ -89,3 +89,106 @@ my_sort(array: list, reverse: bool=False,
 - [Heap Sort in Java](https://stackabuse.com/heap-sort-in-java/)
 - [Quicksort in Java](https://stackabuse.com/quicksort-in-java/)
 - [Selection Sort in Java](https://stackabuse.com/selection-sort-in-java/)
+
+## Инструкция по запуску
+
+### Требования
+- Python 3.10+ (рекомендуется Python 3.11/3.12+)
+- Для графической визуализации желательно установить `matplotlib` (необязательно).  
+  Если `matplotlib` не установлен, визуализация автоматически выводится в консоль пошагово в текстовом виде.
+
+Установка `matplotlib` (при необходимости):
+```bash
+pip install matplotlib
+```
+
+### Структура
+- `my_sort.py` — модуль с реализацией сортировки слиянием и консольная утилита
+- `test_my_sort.py` — тесты
+
+### 1. Запуск тестов
+Из папки проекта выполните:
+```bash
+python3 -m unittest -v
+```
+Ожидаемый результат: все тесты проходят (`OK`).
+
+### 2. Использование функции сортировки в коде
+```python
+from my_sort import my_sort
+
+print(my_sort([2, -3, 5, 0, 5]))                 # [-3, 0, 2, 5, 5]
+print(my_sort([2, -3, 5, 0, 5], reverse=True))   # [5, 5, 2, 0, -3]
+print(my_sort(["banana", "apple", "cherry"]))    # ['apple', 'banana', 'cherry']
+```
+
+### 3. Запуск консольной утилиты (сортировка данных из файла)
+Общий формат:
+```bash
+python3 my_sort.py --input <входной_файл> --output <выходной_файл> --type <number|text> [--reverse]
+```
+
+Параметры:
+- `-i, --input` — путь к входному файлу
+- `-o, --output` — путь к выходному файлу
+- `-t, --type` — тип данных: `number` (числа) или `text` (текст), по умолчанию `number`
+- `-r, --reverse` — сортировка по невозрастанию (без флага — по неубыванию)
+
+> Формат файлов: значения разделяются пробелами и/или переводами строк. Результат записывается в выходной файл через пробел.
+
+#### Пример: сортировка числовых данных по неубыванию
+`input_numbers.txt`:
+```text
+2 -3 5 0 5
+```
+
+Команда:
+```bash
+python3 my_sort.py -i input_numbers.txt -o output_numbers.txt -t number
+```
+
+`output_numbers.txt`:
+```text
+-3 0 2 5 5
+```
+
+#### Пример: сортировка числовых данных по невозрастанию
+```bash
+python3 my_sort.py -i input_numbers.txt -o output_numbers_desc.txt -t number --reverse
+```
+
+#### Пример: сортировка текстовых данных
+`input_text.txt`:
+```text
+banana apple cherry
+```
+
+Команда (по неубыванию):
+```bash
+python3 my_sort.py -i input_text.txt -o output_text.txt -t text
+```
+
+Команда (по невозрастанию):
+```bash
+python3 my_sort.py -i input_text.txt -o output_text_desc.txt -t text --reverse
+```
+
+### 4. Визуализация сортировки по шагам
+Визуализация выполняется для случайного списка заданного размера (реализована для алгоритма сортировки слиянием):
+
+```bash
+python3 my_sort.py --visualize --size 20
+```
+
+Сортировка по невозрастанию в режиме визуализации:
+```bash
+python3 my_sort.py --visualize --size 20 --reverse
+```
+
+Параметры:
+- `--visualize` — включить режим пошаговой визуализации
+- `--size` — размер случайного списка (по умолчанию 20)
+- `--reverse` — сортировка по невозрастанию
+
+### Примечание
+В рамках задания в разделе «Алгоритмы» реализована только **сортировка слиянием** (остальные алгоритмы из списка не реализовывались).
